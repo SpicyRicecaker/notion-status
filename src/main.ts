@@ -4,18 +4,26 @@ import * as path from "path";
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    width: 800,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: true
     },
-    width: 800,
+    alwaysOnTop: true,
+    transparent: true,
+    frame: false,
+    // color format is in #AARRGGBB 
+    // keep in mind taht this value doesn't matter so long as transparent is
+    // true
+    backgroundColor: '#00000000'
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
