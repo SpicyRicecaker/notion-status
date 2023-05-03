@@ -1,13 +1,23 @@
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow, screen } from "electron"
 import * as path from "path"
 
 function createWindow() {
   const development = process.env.NODE_ENV === "development"
   console.log(development)
+
+  const primaryDisplay = screen.getPrimaryDisplay()
+  const { width: displayWidth, height: displayHeight } =
+    primaryDisplay.workAreaSize
+
+  const width = displayWidth * (8 / 100)
+  const height = displayHeight * (1 / 15)
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width,
+    height,
+    x: Math.round(displayWidth / 2 - width - width),
+    y: Math.round(displayHeight - height),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
@@ -18,7 +28,7 @@ function createWindow() {
     // color format is in #AARRGGBB
     // keep in mind that this value doesn't matter so long as transparent is
     // true
-    backgroundColor: development ? "#FFF" : "#00000000",
+    backgroundColor: development ? "#000" : "#00000000",
   })
 
   // and load the index.html of the app.
@@ -27,10 +37,12 @@ function createWindow() {
   if (development) {
     mainWindow.loadURL("http://localhost:3000/")
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   } else {
     // this breaks when trying to load other files in the directory
-    mainWindow.loadFile(path.join(__dirname, "..", "..", "front", "dist", "index.html"))
+    mainWindow.loadFile(
+      path.join(__dirname, "..", "..", "front", "dist", "index.html")
+    )
   }
 }
 
