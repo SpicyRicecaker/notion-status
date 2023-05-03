@@ -12,8 +12,7 @@ cd ../server
 touch .env 
 ```
 
-then, modify `.env` to include `NOTION_KEY` and `NOTION_DATABASE_ID`
-follow steps 1-3 in https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration for instructions on how to get the `NOTION_KEY` and `NOTION_DATABASE_ID`
+then, modify `.env` to include `NOTION_KEY` and `NOTION_DATABASE_ID` (follow steps 1-3 in https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration for instructions on how to get the `NOTION_KEY` and `NOTION_DATABASE_ID`)
 
 Then run
 ```shell
