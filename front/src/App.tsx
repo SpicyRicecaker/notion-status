@@ -11,7 +11,7 @@ const App: Component = () => {
     <div onMouseEnter={() => setSel(true)} onMouseLeave={() => setSel(false)} class={styles.App}>
       <button style={`opacity: ${sel() ? "100%" : "0%"};`} class={styles.button} onClick={refetch}><VsRefresh size={24} color='white' /></button>
       <header class={styles.header}>
-        <span><b>Current Task:</b> {task()}</span>
+        <span class={styles.task}><b>Current Task:</b> {task()}</span>
       </header>
     </div>
   );

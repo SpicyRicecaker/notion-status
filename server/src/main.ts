@@ -23,12 +23,12 @@ function createWindow() {
       nodeIntegration: true,
     },
     alwaysOnTop: !development,
-    transparent: !development,
+    transparent: true,
     frame: false,
     // color format is in #AARRGGBB
     // keep in mind that this value doesn't matter so long as transparent is
     // true
-    backgroundColor: development ? "#000" : "#00000000",
+    backgroundColor: development ? "FFF" : "#00000000",
   })
 
   // and load the index.html of the app.
