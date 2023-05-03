@@ -1,0 +1,1 @@
+- use the `npm` package manager since `pnpm` workspaces seem to be bugged with `solidjs`

@@ -2,6 +2,8 @@ import { app, BrowserWindow } from "electron"
 import * as path from "path"
 
 function createWindow() {
+  const development = process.env.NODE_ENV === "development"
+  console.log(development)
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -10,22 +12,26 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
     },
-    alwaysOnTop: true,
-    transparent: true,
+    alwaysOnTop: !development,
+    transparent: !development,
     frame: false,
     // color format is in #AARRGGBB
-    // keep in mind taht this value doesn't matter so long as transparent is
+    // keep in mind that this value doesn't matter so long as transparent is
     // true
-    backgroundColor: "#00000000",
+    backgroundColor: development ? "#FFF" : "#00000000",
   })
 
   // and load the index.html of the app.
 
   // load the development server in development mode, otherwise load the built version in production
-  mainWindow.loadFile(path.join(__dirname, "../index.html"))
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  if (development) {
+    mainWindow.loadURL("http://localhost:3000/")
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools()
+  } else {
+    // this breaks when trying to load other files in the directory
+    mainWindow.loadFile(path.join(__dirname, "..", "..", "front", "dist", "index.html"))
+  }
 }
 
 // This method will be called when Electron has finished
