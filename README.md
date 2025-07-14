@@ -5,9 +5,9 @@ Shows a small task bar based off of the `Name` property of what your current dat
 ```shell
 git clone https://github.com/SpicyRicecaker/notion-status
 cd notion-status
-npm i
+bun i
 cd front
-npm build
+bun run build
 cd ../server
 touch .env 
 ```
@@ -16,5 +16,5 @@ then, modify `.env` to include `NOTION_KEY` and `NOTION_DATABASE_ID` (follow ste
 
 Then run
 ```shell
-npm start
+bun run start
 ```
